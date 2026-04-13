@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration Form</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; font-size: 13px; background: #f0f0f0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+
+    .form-wrapper {
+      background: #fff;
+      border: 2px solid #003399;
+      padding: 20px 30px;
+      width: 520px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 15px;
+      margin-bottom: 16px;
+      text-decoration: underline;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .form-row label {
+      width: 130px;
+      min-width: 130px;
+      font-weight: bold;
+      font-size: 12px;
+      padding-top: 3px;
+    }
+    .form-row .field { flex: 1; }
+    .form-row input[type="text"],
+    .form-row input[type="email"],
+    .form-row input[type="tel"],
+    .form-row select,
+    .form-row textarea {
+      font-size: 12px;
+      border: 1px solid #888;
+      padding: 2px 4px;
+      font-family: Arial, sans-serif;
+    }
+    .form-row input[type="text"],
+    .form-row input[type="email"],
+    .form-row input[type="tel"] {
+      width: 200px;
+      height: 20px;
+    }
+    .form-row .dob-select select {
+      height: 20px;
+      margin-right: 3px;
+    }
+    .form-row textarea {
+      width: 200px;
+      height: 55px;
+      resize: none;
+    }
+    .form-row select.country-select {
+      width: 200px;
+      height: 20px;
+    }
+
+    /* Gender */
+    .gender-group { display: flex; align-items: center; gap: 6px; }
+    .gender-group label { width: auto; font-weight: normal; font-size: 12px; padding-top: 0; }
+
+    /* Hobbies */
+    .hobbies-group { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; }
+    .hobbies-group label { display: flex; align-items: center; gap: 3px; font-weight: normal; }
+
+    /* Qualification table */
+    .qual-table { border-collapse: collapse; font-size: 11.5px; width: 100%; }
+    .qual-table th, .qual-table td {
+      border: 1px solid #aaa;
+      padding: 2px 5px;
+      text-align: center;
+    }
+    .qual-table th { background: #e8e8e8; font-weight: bold; }
+    .qual-table input[type="text"] { width: 90px; height: 16px; border: none; font-size: 11px; text-align: center; }
+    .qual-table .sl { width: 25px; }
+    .qual-table .exam { width: 75px; }
+    .qual-note { font-size: 10px; color: #555; margin-top: 2px; }
+
+    /* Courses */
+    .courses-group { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; }
+    .courses-group label { display: flex; align-items: center; gap: 3px; font-weight: normal; }
+
+    /* Divider */
+    hr { border: none; border-top: 1px solid #ccc; margin: 10px 0; }
+
+    /* Buttons */
+    .btn-row { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
+    .btn-row button {
+      padding: 4px 18px;
+      font-size: 12px;
+      border: 1px solid #555;
+      background: #e0e0e0;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+    .btn-row button:hover { background: #ccc; }
+    .btn-row button.submit-btn { background: #003399; color: #fff; border-color: #003399; }
+    .btn-row button.submit-btn:hover { background: #0044bb; }
+
+    /* Toast */
+    #toast {
+      display: none;
+      margin-top: 14px;
+      background: #003399;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Records */
+    #records-section { width: 520px; margin-top: 18px; }
+    #records-section h3 { font-size: 13px; margin-bottom: 8px; color: #003399; }
+    #records-table-wrap { overflow-x: auto; }
+    table.records { border-collapse: collapse; width: 100%; font-size: 11px; background: #fff; }
+    table.records th { background: #003399; color: #fff; padding: 4px 6px; }
+    table.records td { border: 1px solid #ccc; padding: 3px 6px; }
+    table.records tr:nth-child(even) { background: #f5f5ff; }
+    .no-records { font-size: 12px; color: #777; }
+  </style>
+</head>
+<body>
+
+<div class="form-wrapper">
+  <h2>STUDENT REGISTRATION FORM</h2>
+  <form id="regForm" onsubmit="return false;">
+
+    <!-- First Name -->
+    <div class="form-row">
+      <label>FIRST NAME</label>
+      <div class="field"><input type="text" id="firstName" required></div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-row">
+      <label>LAST NAME</label>
+      <div class="field"><input type="text" id="lastName" required></div>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="form-row">
+      <label>DATE OF BIRTH</label>
+      <div class="field dob-select">
+        <select id="dobDay"></select>
+        <select id="dobMonth"></select>
+        <select id="dobYear"></select>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-row">
+      <label>EMAIL ID</label>
+      <div class="field"><input type="email" id="email" required></div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="form-row">
+      <label>MOBILE NUMBER</label>
+      <div class="field"><input type="tel" id="mobile"></div>
+    </div>
+
+    <!-- Gender -->
+    <div class="form-row">
+      <label>GENDER</label>
+      <div class="field">
+        <div class="gender-group">
+          <label><input type="radio" name="gender" value="Male"> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-row">
+      <label>ADDRESS</label>
+      <div class="field"><textarea id="address"></textarea></div>
+    </div>
+
+    <!-- City -->
+    <div class="form-row">
+      <label>CITY</label>
+      <div class="field"><input type="text" id="city"></div>
+    </div>
+
+    <!-- Pin Code -->
+    <div class="form-row">
+      <label>PIN CODE</label>
+      <div class="field"><input type="text" id="pinCode"></div>
+    </div>
+
+    <!-- State -->
+    <div class="form-row">
+      <label>STATE</label>
+      <div class="field"><input type="text" id="state"></div>
+    </div>
+
+    <!-- Country -->
+    <div class="form-row">
+      <label>COUNTRY</label>
+      <div class="field">
+        <select id="country" class="country-select"></select>
+      </div>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="form-row">
+      <label>HOBBIES</label>
+      <div class="field">
+        <div class="hobbies-group">
+          <label><input type="checkbox" name="hobbies" value="Drawing"> Drawing</label>
+          <label><input type="checkbox" name="hobbies" value="Singing"> Singing</label>
+          <label><input type="checkbox" name="hobbies" value="Dancing"> Dancing</label>
+          <label><input type="checkbox" name="hobbies" value="Sketching"> Sketching</label>
+          <label><input type="checkbox" name="hobbies" value="Others"> Others</label>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Qualification -->
+    <div class="form-row" style="align-items:flex-start;">
+      <label style="padding-top:6px;">QUALIFICATION</label>
+      <div class="field">
+        <table class="qual-table">
+          <thead>
+            <tr>
+              <th class="sl">Sl.No</th>
+              <th class="exam">Examination</th>
+              <th>Board</th>
+              <th>Percentage</th>
+              <th>Year of Passing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td><td>Class X</td>
+              <td><input type="text" class="q-board"></td>
+              <td><input type="text" class="q-percent"></td>
+              <td><input type="text" class="q-year"></td>
+            </tr>
+            <tr>
+              <td>2</td><td>Class XII</td>
+              <td><input type="text" class="q-board"></td>
+              <td><input type="text" class="q-percent"></td>
+              <td><input type="text" class="q-year"></td>
+            </tr>
+            <tr>
+              <td>3</td><td>Graduation</td>
+              <td><input type="text" class="q-board"></td>
+              <td><input type="text" class="q-percent"></td>
+              <td><input type="text" class="q-year"></td>
+            </tr>
+            <tr>
+              <td>4</td><td>Masters</td>
+              <td><input type="text" class="q-board"></td>
+              <td><input type="text" class="q-percent"></td>
+              <td><input type="text" class="q-year"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="qual-note">(16 char max)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(upto 2 decimal)</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Courses Applied For -->
+    <div class="form-row">
+      <label>COURSES<br>APPLIED FOR</label>
+      <div class="field">
+        <div class="courses-group">
+          <label><input type="radio" name="course" value="BCA"> BCA</label>
+          <label><input type="radio" name="course" value="B.Com"> B.Com</label>
+          <label><input type="radio" name="course" value="B.Sc"> B.Sc</label>
+          <label><input type="radio" name="course" value="BA"> B.A</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+      <button type="reset" onclick="clearToast()">Reset</button>
+    </div>
+  </form>
+</div>
+
+<div id="toast">✅ Registration saved successfully!</div>
+
+<!-- Saved Records -->
+<div id="records-section">
+  <h3>📋 Registered Students</h3>
+  <div id="records-table-wrap"><p class="no-records">No records yet.</p></div>
+</div>
+
+<script>
+  // ---- Populate Days ----
+  const daySelect = document.getElementById('dobDay');
+  const dayOpt0 = document.createElement('option'); dayOpt0.value=''; dayOpt0.text='Day'; daySelect.add(dayOpt0);
+  for(let d=1;d<=31;d++){ let o=document.createElement('option'); o.value=o.text=d; daySelect.add(o); }
+
+  // ---- Populate Months ----
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthSelect = document.getElementById('dobMonth');
+  const mOpt0 = document.createElement('option'); mOpt0.value=''; mOpt0.text='Month'; monthSelect.add(mOpt0);
+  months.forEach((m,i)=>{ let o=document.createElement('option'); o.value=i+1; o.text=m; monthSelect.add(o); });
+
+  // ---- Populate Years ----
+  const yearSelect = document.getElementById('dobYear');
+  const yOpt0 = document.createElement('option'); yOpt0.value=''; yOpt0.text='Year'; yearSelect.add(yOpt0);
+  for(let y=new Date().getFullYear(); y>=1950; y--){ let o=document.createElement('option'); o.value=o.text=y; yearSelect.add(o); }
+
+  // ---- Populate Countries ----
+  const countries = [
+    "Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan",
+    "Bahamas","Bahrain","Bangladesh","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina",
+    "Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Chad",
+    "Chile","China","Colombia","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Denmark",
+    "Djibouti","Dominican Republic","Ecuador","Egypt","El Salvador","Estonia","Ethiopia","Finland","France","Gabon",
+    "Gambia","Georgia","Germany","Ghana","Greece","Guatemala","Guinea","Haiti","Honduras","Hungary",
+    "Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan",
+    "Jordan","Kazakhstan","Kenya","Kuwait","Laos","Latvia","Lebanon","Libya","Lithuania","Luxembourg",
+    "Madagascar","Malaysia","Maldives","Mali","Malta","Mexico","Moldova","Monaco","Mongolia","Morocco",
+    "Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","Norway",
+    "Oman","Pakistan","Palestine","Panama","Paraguay","Peru","Philippines","Poland","Portugal","Qatar",
+    "Romania","Russia","Rwanda","Saudi Arabia","Senegal","Serbia","Sierra Leone","Singapore","Slovakia","Slovenia",
+    "Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Sweden","Switzerland","Syria",
+    "Taiwan","Tanzania","Thailand","Togo","Tunisia","Turkey","Uganda","Ukraine","United Arab Emirates",
+    "United Kingdom","United States","Uruguay","Uzbekistan","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
+  ];
+  const countrySelect = document.getElementById('country');
+  const cOpt0 = document.createElement('option'); cOpt0.value=''; cOpt0.text='Select Country'; countrySelect.add(cOpt0);
+  countries.forEach(c=>{ let o=document.createElement('option'); o.value=o.text=c; countrySelect.add(o); });
+
+  // Default to India
+  countrySelect.value = 'India';
+
+  // ---- IndexedDB Setup ----
+  let db;
+  const request = indexedDB.open('StudentDB', 1);
+  request.onupgradeneeded = e => {
+    db = e.target.result;
+    if(!db.objectStoreNames.contains('students')) {
+      db.createObjectStore('students', { keyPath: 'id', autoIncrement: true });
+    }
+  };
+  request.onsuccess = e => { db = e.target.result; loadRecords(); };
+  request.onerror = () => { console.warn('IndexedDB not available, using localStorage fallback.'); loadRecords(); };
+
+  // ---- Submit ----
+  function submitForm() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    if(!firstName || !lastName || !email) {
+      alert('Please fill in First Name, Last Name and Email.');
+      return;
+    }
+
+    const hobbies = [...document.querySelectorAll('input[name="hobbies"]:checked')].map(c=>c.value);
+    const gender  = document.querySelector('input[name="gender"]:checked')?.value || '';
+    const course  = document.querySelector('input[name="course"]:checked')?.value  || '';
+    const boards    = [...document.querySelectorAll('.q-board')].map(i=>i.value);
+    const percents  = [...document.querySelectorAll('.q-percent')].map(i=>i.value);
+    const years     = [...document.querySelectorAll('.q-year')].map(i=>i.value);
+
+    const record = {
+      firstName, lastName,
+      dob: `${document.getElementById('dobDay').value}/${document.getElementById('dobMonth').value}/${document.getElementById('dobYear').value}`,
+      email,
+      mobile:    document.getElementById('mobile').value,
+      gender,
+      address:   document.getElementById('address').value,
+      city:      document.getElementById('city').value,
+      pinCode:   document.getElementById('pinCode').value,
+      state:     document.getElementById('state').value,
+      country:   document.getElementById('country').value,
+      hobbies:   hobbies.join(', '),
+      qualification: [
+        {exam:'Class X',    board:boards[0], percent:percents[0], year:years[0]},
+        {exam:'Class XII',  board:boards[1], percent:percents[1], year:years[1]},
+        {exam:'Graduation', board:boards[2], percent:percents[2], year:years[2]},
+        {exam:'Masters',    board:boards[3], percent:percents[3], year:years[3]},
+      ],
+      course,
+      timestamp: new Date().toLocaleString()
+    };
+
+    if(db) {
+      const tx = db.transaction('students','readwrite');
+      tx.objectStore('students').add(record);
+      tx.oncomplete = () => { showToast(); loadRecords(); document.getElementById('regForm').reset(); countrySelect.value='India'; };
+    } else {
+      // localStorage fallback
+      const existing = JSON.parse(localStorage.getItem('students') || '[]');
+      record.id = Date.now();
+      existing.push(record);
+      localStorage.setItem('students', JSON.stringify(existing));
+      showToast(); loadRecords(); document.getElementById('regForm').reset(); countrySelect.value='India';
+    }
+  }
+
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(()=>t.style.display='none', 3000);
+  }
+  function clearToast() { document.getElementById('toast').style.display='none'; }
+
+  // ---- Load Records ----
+  function loadRecords() {
+    const wrap = document.getElementById('records-table-wrap');
+    const renderTable = (rows) => {
+      if(!rows || rows.length === 0) { wrap.innerHTML='<p class="no-records">No records yet.</p>'; return; }
+      let html = `<table class="records"><thead><tr>
+        <th>#</th><th>Name</th><th>DOB</th><th>Email</th><th>Mobile</th>
+        <th>Gender</th><th>City</th><th>State</th><th>Country</th><th>Hobbies</th><th>Course</th><th>Registered</th>
+      </tr></thead><tbody>`;
+      rows.forEach((r,i)=>{
+        html += `<tr>
+          <td>${i+1}</td>
+          <td>${r.firstName} ${r.lastName}</td>
+          <td>${r.dob}</td>
+          <td>${r.email}</td>
+          <td>${r.mobile||''}</td>
+          <td>${r.gender||''}</td>
+          <td>${r.city||''}</td>
+          <td>${r.state||''}</td>
+          <td>${r.country||''}</td>
+          <td>${r.hobbies||''}</td>
+          <td>${r.course||''}</td>
+          <td>${r.timestamp||''}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      wrap.innerHTML = html;
+    };
+
+    if(db) {
+      const tx = db.transaction('students','readonly');
+      const store = tx.objectStore('students');
+      const getAllReq = store.getAll();
+      getAllReq.onsuccess = e => renderTable(e.target.result);
+    } else {
+      const rows = JSON.parse(localStorage.getItem('students') || '[]');
+      renderTable(rows);
+    }
+  }
+</script>
+
+</body>
+</html>
