@@ -1,40 +1,34 @@
-# Project Title
+# Web Application Projects
 
-## Table of Contents
-1. [Introduction](#introduction)  
-2. [Prerequisites](#prerequisites)  
-3. [Learning Outcomes](#learning-outcomes)  
-4. [Project Comparisons](#project-comparisons)  
-5. [File Structure](#file-structure)  
-6. [Author Information](#author-information)  
+This repository contains various web application projects that showcase different technologies and approaches to web development.
 
-## Introduction
-This project is aimed at ... (provide a brief introduction).
+## Project 1: E-Commerce Web Application
 
-## Prerequisites
-- Prerequisite 1
-- Prerequisite 2
+This project is a fully functional e-commerce site built using React and Node.js. Key features include:
+- User authentication
+- Shopping cart functionality
+- Payment integration using Stripe API
 
-## Learning Outcomes
-After completing this project, you will be able to:
-- Learning outcome 1
-- Learning outcome 2
+## Project 2: Personal Blog
 
-## Project Comparisons
-This project compares ... (provide details about similar projects or approaches).
+This project demonstrates a personal blogging platform created using Django. Features include:
+- Post creation and editing
+- User comments
+- Tag-based categorization
 
-## File Structure
-```
-/path/to/your/files
---- file1.ext
---- folder/
-    --- file2.ext
-```
+## Project 3: Portfolio Site
+
+This is a personal portfolio site created using HTML, CSS, and JavaScript. It showcases different projects and provides contact information.
+
+## Project 4: Task Management App
+
+A task management application built with Angular and Firebase. Users can create, read, update, and delete tasks with real-time synchronization.
 
 ## Author Information
-- **Name:** Merveille Umugwaneza  
-- **GitHub:** [Merveille-umugwaneza](https://github.com/Merveille-umugwaneza)  
-- **Email:** [youremail@example.com](mailto:youremail@example.com)  
 
----  
-_Updated on 2026-04-13 13:25:29 UTC_
+- **Name:** Merveille Umugwaneza
+- **GitHub:** [Merveille-umugwaneza](https://github.com/Merveille-umugwaneza)
+- **Email:** [youremail@example.com](mailto:youremail@example.com)
+
+---
+_Updated on 2026-04-13_
