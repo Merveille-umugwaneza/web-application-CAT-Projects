@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .converter {
+      background: #e0e0e0;
+      width: 380px;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin: 12px 0 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+    button:hover {
+      background: #0063b3;
+    }
+    .result {
+      background: #000;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      min-height: 50px;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="converter">
+  <h1>Currency Converter APP</h1>
+
+  <label>Enter Amount IN FRW</label>
+  <input type="number" id="amount" placeholder="예: 100000" min="0" step="0.01">
+
+  <label>Select Currency</label>
+  <select id="currency">
+    <option value="USD">USD</option>
+    <option value="EUR">EURO</option>
+  </select>
+
+  <label>Rate (자동 계산)</label>
+  <input type="text" id="rate" readonly placeholder="환율이 표시됩니다">
+
+  <button onclick="convertCurrency()">CONVERT</button>
+
+  <div class="result" id="result">
+    Result Here ....
+  </div>
+</div>
+
+<script>
+  // 현재 환율 (2026년 4월 기준, 1 USD = 1461 RWF, 1 EUR = 1714 RWF)
+  const rates = {
+    USD: 1461,
+    EUR: 1714
+  };
+
+  function convertCurrency() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const selectedCurrency = document.getElementById('currency').value;
+
+    if (!amount || amount <= 0) {
+      document.getElementById('result').innerHTML = "올바른 금액을 입력하세요!";
+      document.getElementById('rate').value = "";
+      return;
+    }
+
+    const rate = rates[selectedCurrency];
+    const converted = (amount / rate).toFixed(2);   // FRW → 선택 통화로 변환
+
+    // Rate 표시
+    document.getElementById('rate').value = `1 ${selectedCurrency} = ${rate} FRW`;
+
+    // 결과 표시
+    document.getElementById('result').innerHTML = `
+      ${amount.toLocaleString()} FRW = <strong>${converted} ${selectedCurrency}</strong>
+    `;
+  }
+
+  // 통화 선택 시 Rate 미리보기 업데이트
+  document.getElementById('currency').addEventListener('change', function() {
+    const selected = this.value;
+    document.getElementById('rate').value = `1 ${selected} = ${rates[selected]} FRW`;
+  });
+</script>
+
+</body>
+</html>
