@@ -1,6 +1,3 @@
-# Web Application Projects
-
-This repository contains various web application projects that showcase different technologies and approaches to web development.
 # Web Development Projects
 
 This repository contains 4 web development projects built with HTML, CSS, JavaScript, PHP, and MySQL.
