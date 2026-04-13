@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Web Site</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; font-size: 13px; background: #fff; }
+
+    /* Top bar */
+    #topbar {
+      background: #003399;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      gap: 4px;
+    }
+    #topbar input[type="text"] {
+      width: 120px;
+      height: 18px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      padding: 1px 4px;
+    }
+    #topbar button {
+      height: 18px;
+      font-size: 11px;
+      padding: 0 8px;
+      background: #ddd;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+
+    /* Layout */
+    #layout {
+      display: flex;
+      min-height: calc(100vh - 28px);
+    }
+
+    /* Left sidebar */
+    #sidebar {
+      width: 130px;
+      min-width: 130px;
+      background: #ffff00;
+      padding: 10px 12px;
+      border-right: 1px solid #ccc;
+    }
+    #sidebar ul {
+      list-style: disc;
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+    #sidebar ul li {
+      margin-bottom: 4px;
+    }
+    #sidebar ul li a {
+      color: #000080;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    #sidebar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    #main {
+      flex: 1;
+      padding: 16px 20px;
+    }
+    #main h1 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      font-family: Arial, sans-serif;
+    }
+    #main img {
+      float: left;
+      width: 200px;
+      height: 145px;
+      margin-right: 14px;
+      margin-bottom: 8px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+    }
+    #main p {
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+    .clearfix::after { content: ""; display: table; clear: both; }
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+    <input type="text" value="">
+    <button>Search...</button>
+  </div>
+
+  <div id="layout">
+    <div id="sidebar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Doc</a></li>
+      </ul>
+    </div>
+
+    <div id="main">
+      <h1>My Web site</h1>
+      <div class="clearfix">
+        <!-- Placeholder image mimicking solar panels + device -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/480px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg" alt="Solar panels with device" onerror="this.style.background='#aaa';this.removeAttribute('src')">
+        <p>
+          As the software industry moves into the second decade of the 21st century, software quality is increasingly
+          becoming essential to all businesses and knowledge of software testing is becoming necessary for all software
+          engineers. The course focus on the theoretical concepts of Software Testing with high emphasis on inclusion of
+          the practical context which is equally needed to prepare the learner for the demands of this field in the workplace.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
