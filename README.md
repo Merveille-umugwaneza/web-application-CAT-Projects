@@ -83,9 +83,9 @@ A simple JavaScript currency converter.
 
 ---
 
-**Good Luck!**
 
 
 
 
-- **Name:** Merveille Umugwaneza
+
+- **Names:** Merveille Umugwaneza
